@@ -15,6 +15,11 @@ base {
     archivesName = project.archives_base_name
 }
 
+configurations {
+    // Usada só pelo runServer de dev; não vai para o jar publicado.
+    devServerIcu
+}
+
 repositories {
     // Cobblemon publica em ambos; o segundo é o espelho oficial (Reposilite).
     maven {
@@ -46,6 +51,22 @@ dependencies {
 
     // O Cobblemon é escrito em Kotlin e exige fabric-language-kotlin em runtime.
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+
+    // Só para ./gradlew runServer: o motor de batalha do Cobblemon roda em GraalJS e
+    // precisa do icu4j. O cliente do Minecraft já traz essa lib; o servidor dedicado
+    // não — e sem ela a thread "Cobblemon Showdown" morre com NoClassDefFoundError
+    // e o servidor nunca termina de subir. Não entra no jar publicado.
+    devServerIcu "com.ibm.icu:icu4j:${project.icu4j_version}"
+}
+
+// O Loom tira as bibliotecas client-only do classpath do runServer, e o icu4j é uma
+// delas — por isso ele entra por bootclasspath em vez de runtimeOnly.
+loom {
+    runs {
+        server {
+            vmArgs "-Xbootclasspath/a:" + configurations.devServerIcu.asPath
+        }
+    }
 }
 
 processResources {

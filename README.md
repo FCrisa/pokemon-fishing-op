@@ -143,6 +143,10 @@ O build precisa alcançar o Maven do Cobblemon
 (`https://maven.impactdev.net/repository/development/` ou `https://artefacts.cobblemon.com/releases`)
 e `runClient` precisa do CDN de assets da Mojang (`resources.download.minecraft.net`).
 
+`./gradlew runServer` também funciona: o `build.gradle` injeta o icu4j no bootclasspath do servidor
+porque o motor de batalha do Cobblemon roda em GraalJS e precisa dessa lib, que o Minecraft só traz
+no cliente.
+
 ## Notas de implementação
 
 - **Sem Mixin.** O ramo "Pokémon" usa `CobblemonEvents.BOBBER_SPAWN_POKEMON_PRE`, que é cancelável;
