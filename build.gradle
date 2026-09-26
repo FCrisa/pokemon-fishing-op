@@ -1,5 +1,10 @@
 plugins {
     id 'fabric-loom' version '1.11.8'
+    // O mod é 100% Java, mas o plugin Kotlin é obrigatório: é ele que faz o Loom
+    // remapear as anotações @Metadata do jar do Cobblemon. Sem isso o kotlin-reflect
+    // do Cobblemon procura classes em nomes intermediary (net.minecraft.class_2960)
+    // e o jogo não sobe em dev.
+    id 'org.jetbrains.kotlin.jvm' version '2.2.20'
     id 'maven-publish'
 }
 
@@ -60,6 +65,10 @@ processResources {
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 21
     it.options.encoding = 'UTF-8'
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 java {

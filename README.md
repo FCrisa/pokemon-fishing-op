@@ -150,5 +150,9 @@ e `runClient` precisa do CDN de assets da Mojang (`resources.download.minecraft.
   `cobblemon:fishing/pokerod` e `minecraft:gameplay/fishing`.
 - Ao cancelar `BOBBER_SPAWN_POKEMON_PRE`, o Cobblemon 1.8.1 sai de `retrieve()` antes do `discard()`
   e o bobber ficaria preso na água; o mod descarta o bobber por conta própria.
+- O `build.gradle` aplica o plugin `org.jetbrains.kotlin.jvm` mesmo o mod sendo 100% Java. Não é
+  enfeite: é ele que liga o remap das anotações `@Metadata` do jar do Cobblemon no Loom. Sem isso o
+  `kotlin-reflect` do Cobblemon procura `net.minecraft.class_2960` (nome intermediary) em dev e o
+  jogo nem sobe. É a mesma solução que o Mega Showdown usa.
 - O tooltip de sorte da vara é client-side e lê o `config/fishingop.json` **do cliente**. Num servidor
   dedicado, copie a config pro cliente se quiser que o número bata.
