@@ -1,0 +1,25 @@
+{
+  "item.fishingop.legendary_summoner": "Invocador Lendário",
+  "item.fishingop.legendary_summoner.tooltip": "Clique com o botão direito para invocar um Pokémon lendário.",
+
+  "fishingop.tier.common": "Comum",
+  "fishingop.tier.uncommon": "Incomum",
+  "fishingop.tier.rare": "Raro",
+  "fishingop.tier.epic": "Épico",
+  "fishingop.tier.legendary": "Lendário",
+
+  "fishingop.drop.caught": "%s · %s",
+
+  "fishingop.tooltip.rod_luck": "Sorte de pesca: Nível %s",
+
+  "fishingop.summoner.title": "INVOCADOR LENDÁRIO",
+  "fishingop.summoner.subtitle": "Clique com o botão direito para invocar",
+  "fishingop.summoner.found": "%s pescou um Invocador Lendário!",
+  "fishingop.summoner.summoned": "%s invocou %s!",
+  "fishingop.summoner.no_species": "Nenhuma espécie lendária implementada foi encontrada. Confira a config do fishingop.",
+
+  "fishingop.command.reloaded": "Config recarregada: %s itens na pool, %s espécies no invocador.",
+  "fishingop.command.unknown_ball": "Pokébola ou vara desconhecida: %s",
+  "fishingop.command.players_only": "Esse comando precisa ser executado por um jogador.",
+  "fishingop.command.gave_summoner": "Você recebeu %s Invocador(es) Lendário(s)."
+}

@@ -1,0 +1,25 @@
+{
+  "item.fishingop.legendary_summoner": "Legendary Summoner",
+  "item.fishingop.legendary_summoner.tooltip": "Right-click to summon a legendary Pokémon.",
+
+  "fishingop.tier.common": "Common",
+  "fishingop.tier.uncommon": "Uncommon",
+  "fishingop.tier.rare": "Rare",
+  "fishingop.tier.epic": "Epic",
+  "fishingop.tier.legendary": "Legendary",
+
+  "fishingop.drop.caught": "%s · %s",
+
+  "fishingop.tooltip.rod_luck": "Fishing luck: Tier %s",
+
+  "fishingop.summoner.title": "LEGENDARY SUMMONER",
+  "fishingop.summoner.subtitle": "Right-click to summon",
+  "fishingop.summoner.found": "%s fished up a Legendary Summoner!",
+  "fishingop.summoner.summoned": "%s summoned %s!",
+  "fishingop.summoner.no_species": "No implemented legendary species found. Check the fishingop config.",
+
+  "fishingop.command.reloaded": "Config reloaded: %s items in the pool, %s species in the summoner.",
+  "fishingop.command.unknown_ball": "Unknown Poké Ball or rod: %s",
+  "fishingop.command.players_only": "This command must be run by a player.",
+  "fishingop.command.gave_summoner": "You received %s Legendary Summoner(s)."
+}

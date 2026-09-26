@@ -1,0 +1,75 @@
+plugins {
+    id 'fabric-loom' version '1.11.8'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    // Cobblemon publica em ambos; o segundo é o espelho oficial (Reposilite).
+    maven {
+        name = 'ImpactDev'
+        url = 'https://maven.impactdev.net/repository/development/'
+    }
+    maven {
+        name = 'Cobblemon'
+        url = 'https://artefacts.cobblemon.com/releases'
+    }
+    // Espelho alternativo caso os de cima estejam fora do ar.
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // Cobblemon 1.8.1 para Fabric 1.21.1 (coordenadas conferidas em
+    // gradle/build-logic/src/main/kotlin/cobblemon.publish-conventions.gradle.kts do repo deles).
+    modImplementation "com.cobblemon:fabric:${project.cobblemon_version}"
+
+    // O Cobblemon é escrito em Kotlin e exige fabric-language-kotlin em runtime.
+    modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'minecraft_version', project.minecraft_version
+    inputs.property 'loader_version', project.loader_version
+
+    filesMatching('fabric.mod.json') {
+        expand([
+                version          : project.version,
+                minecraft_version: project.minecraft_version,
+                loader_version   : project.loader_version
+        ])
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    it.options.encoding = 'UTF-8'
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}
