@@ -147,6 +147,22 @@ e `runClient` precisa do CDN de assets da Mojang (`resources.download.minecraft.
 porque o motor de batalha do Cobblemon roda em GraalJS e precisa dessa lib, que o Minecraft só traz
 no cliente.
 
+## Testado em jogo
+
+Validado num servidor de dev com Cobblemon 1.8.1 e cliente conectado:
+
+- pool montada do registro: **714 itens** (Comum 333, Incomum 51, Raro 240, Épico 78, Lendário 12)
+  e **22 espécies** no Invocador, sem o Mega Showdown instalado
+- `/fishingop simulate 3000 poke_ball` → Raro+ 17,7%, Invocador 0,533%
+- `/fishingop simulate 3000 master_ball` → Raro+ 38,9%, Invocador 1,533%
+- 22 fisgadas seguidas com Poké Rod: só itens do Cobblemon, Master Ball ×4, duplicação até ×13,
+  bônus de pokébola saindo e **nenhum bobber preso na água**
+- vara vanilla: `/loot spawn ... fish minecraft:gameplay/fishing` devolvendo itens do Cobblemon
+- `pokeRodItemChance: 1.0` → 14/14 fisgadas do ramo Pokémon interceptadas e viradas em item,
+  zero Pokémon spawnado pela vara; com `0.0` → 9/12 viram Pokémon normalmente
+- Invocador usado em jogo: Naganadel spawnado com partículas, som e anúncio no chat
+- título/action bar por tier e o título grande do Invocador conferidos na tela
+
 ## Notas de implementação
 
 - **Sem Mixin.** O ramo "Pokémon" usa `CobblemonEvents.BOBBER_SPAWN_POKEMON_PRE`, que é cancelável;
